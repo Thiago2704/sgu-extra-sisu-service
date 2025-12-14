@@ -1,11 +1,24 @@
 package br.edu.ufape.sgu_extra_sisu_service.repository;
 
+import br.edu.ufape.sgu_extra_sisu_service.model.EditalExtraSisu;
+import br.edu.ufape.sgu_extra_sisu_service.model.QEditalExtraSisu; 
+import com.querydsl.core.types.dsl.StringPath;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
+import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.stereotype.Repository;
 
-import br.edu.ufape.sgu_extra_sisu_service.model.EditalExtraSisu;
-
 @Repository
-public interface EditalExtraSisuRepository extends JpaRepository<EditalExtraSisu, Long> {
-    
+public interface EditalExtraSisuRepository extends 
+        JpaRepository<EditalExtraSisu, Long>, 
+        QuerydslPredicateExecutor<EditalExtraSisu>,  
+        QuerydslBinderCustomizer<QEditalExtraSisu> { 
+
+    @Override
+    default void customize(QuerydslBindings bindings, QEditalExtraSisu root) {
+
+        bindings.bind(String.class)
+                .first((StringPath path, String value) -> path.containsIgnoreCase(value)); 
+    }
 }

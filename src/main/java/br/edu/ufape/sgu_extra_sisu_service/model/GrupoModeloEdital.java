@@ -18,4 +18,6 @@ public class GrupoModeloEdital {
     private Long id;
     @OneToMany
     private List<ModalidadesEdital> editais;
+    @Version
+    private Long version;
 }
