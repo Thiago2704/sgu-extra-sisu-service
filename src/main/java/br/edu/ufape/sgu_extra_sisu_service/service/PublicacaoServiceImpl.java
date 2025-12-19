@@ -4,6 +4,8 @@ import br.edu.ufape.sgu_extra_sisu_service.model.EditalExtraSisu;
 import br.edu.ufape.sgu_extra_sisu_service.model.Publicacao;
 import br.edu.ufape.sgu_extra_sisu_service.repository.EditalExtraSisuRepository;
 import br.edu.ufape.sgu_extra_sisu_service.repository.PublicacaoRepository;
+import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.PublicacaoService;
+
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
