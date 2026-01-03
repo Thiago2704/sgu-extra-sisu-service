@@ -1,5 +1,3 @@
-ARG BASE_IMAGE=eclipse-temurin:25-jdk-noble
-
 FROM ${BASE_IMAGE} AS build
 WORKDIR /app
 
@@ -14,6 +12,7 @@ RUN --mount=type=cache,target=/root/.m2 \
 COPY src ./src
 RUN --mount=type=cache,target=/root/.m2 \
     ./mvnw clean install -DskipTests
+    ./mvnw clean package -Dmaven.test.skip=true
 
 FROM ${BASE_IMAGE} AS runtime
 WORKDIR /app
