@@ -1,5 +1,13 @@
 package br.edu.ufape.sgu_extra_sisu_service.fachada;
 
+import br.edu.ufape.sgu_extra_sisu_service.controller.request.DataEtapaRequest;
+import br.edu.ufape.sgu_extra_sisu_service.controller.request.EtapaRequest;
+import br.edu.ufape.sgu_extra_sisu_service.controller.response.DataEtapaResponse;
+import br.edu.ufape.sgu_extra_sisu_service.controller.response.EtapaResponse;
+import br.edu.ufape.sgu_extra_sisu_service.editais.DataEtapaServiceClient;
+import br.edu.ufape.sgu_extra_sisu_service.service.EtapaServiceHandler;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +36,12 @@ public class Fachada {
     private final EditalInscricaoHandler editalInscricaoHandler;
     private final StatusPersonalizadoHandler statusPersonalizadoHandler;
     private final ValorCampoHandler valorCampoHandler;
+
+    @Autowired
+    private EtapaServiceHandler etapaHandler;
+
+    @Autowired
+    private DataEtapaServiceClient dataEtapaServiceClient;
 
     public EditalExtraSisu salvarEditalExtraSisu(EditalExtraSisu edital) {
         return extraSisuService.salvar(edital);
@@ -112,4 +126,21 @@ public class Fachada {
         valorCampoHandler.deletar(id);
     }
 
+    /* =========================== Etapas =================================*/
+
+    public EtapaResponse criarEtapaNoEdital(EtapaRequest request) {
+        return etapaHandler.salvarNoModuloEditais(request);
+    }
+
+    public EtapaResponse salvarEtapa(EtapaRequest request) {
+        return etapaHandler.salvarNoModuloEditais(request);
+    }
+
+    public EtapaResponse buscarEtapa(Long id) {
+        return etapaHandler.buscarNoModuloEditais(id);
+    }
+
+    public DataEtapaResponse salvarDataEtapa(@Valid DataEtapaRequest request) {
+        return dataEtapaServiceClient.salvar(request);
+    }
 }
