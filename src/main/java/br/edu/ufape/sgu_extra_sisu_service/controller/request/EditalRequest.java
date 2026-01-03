@@ -12,7 +12,7 @@ public class EditalRequest {
 
     @NotBlank(message = "O nome é obrigatório") 
     @Size(min = 5, max = 100, message = "O nome deve ter entre 5 e 100 caracteres")
-    private String nome;
+    private String titulo;
     
     @NotBlank(message = "O PDF é obrigatório")
     private String pdf;
@@ -23,9 +23,13 @@ public class EditalRequest {
     @NotNull(message = "Data de finalização obrigatória")
     private LocalDateTime dataFinalizacao;
 
+    @Size(min = 5, max = 100, message = "O nome deve ter entre 5 e 100 caracteres")
+    private String descricao;
+
     public EditalExtraSisu toModel() {
         EditalExtraSisu edital = new EditalExtraSisu();
-        edital.setNome(this.nome);
+        edital.setTitulo(this.titulo);
+        edital.setDescricao(this.descricao);
         edital.setPdf(this.pdf);
         edital.setDataInscricao(this.dataInscricao);
         edital.setDataFinalizacao(this.dataFinalizacao);

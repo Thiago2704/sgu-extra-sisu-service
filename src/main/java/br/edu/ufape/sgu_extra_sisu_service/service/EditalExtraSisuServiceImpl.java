@@ -41,7 +41,8 @@ public class EditalExtraSisuServiceImpl implements EditalExtraSisuService {
     public EditalExtraSisu atualizar(Long id, EditalExtraSisu editalAtualizado) {
         EditalExtraSisu editalExistente = buscarPorId(id);
         
-        editalExistente.setNome(editalAtualizado.getNome());
+        editalExistente.setTitulo(editalAtualizado.getTitulo());
+        editalExistente.setDescricao(editalAtualizado.getDescricao());
         editalExistente.setPdf(editalAtualizado.getPdf());
         editalExistente.setDataInscricao(editalAtualizado.getDataInscricao());
         editalExistente.setDataFinalizacao(editalAtualizado.getDataFinalizacao());

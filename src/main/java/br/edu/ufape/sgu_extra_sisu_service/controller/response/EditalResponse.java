@@ -10,7 +10,8 @@ import lombok.Data;
 @Data
 public class EditalResponse {
     private Long id;
-    private String nome;
+    private String titulo;
+    private String descricao;
     private String pdf;
     private LocalDateTime dataInscricao;
     private LocalDateTime dataFinalizacao;
