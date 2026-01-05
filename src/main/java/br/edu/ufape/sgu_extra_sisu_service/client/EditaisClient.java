@@ -1,6 +1,7 @@
 package br.edu.ufape.sgu_extra_sisu_service.client;
 
 import br.edu.ufape.sgu_extra_sisu_service.controller.request.InscricaoRequest;
+import br.edu.ufape.sgu_extra_sisu_service.controller.response.HistoricoEtapaInscricaoResponse;
 import br.edu.ufape.sgu_extra_sisu_service.controller.response.InscricaoResponse;
 import br.edu.ufape.sgu_extra_sisu_service.controller.response.PageResponse;
 import br.edu.ufape.sgu_extra_sisu_service.controller.response.StatusPersonalizadoResponse;
@@ -70,4 +71,12 @@ public interface EditaisClient {
 
     @DeleteMapping("/valor-campo/{id}")
     void deletarValorCampo(@PathVariable("id") Long id);
+
+    // ================== Histórico etapa inscrição ==================
+
+    @GetMapping("/historico-etapa-inscricao/{id}")
+    HistoricoEtapaInscricaoResponse buscarHistoricoPorId(@PathVariable("id") Long id);
+
+    @GetMapping("/historico-etapa-inscricao")
+    PageResponse<HistoricoEtapaInscricaoResponse> listarHistoricos();
 }

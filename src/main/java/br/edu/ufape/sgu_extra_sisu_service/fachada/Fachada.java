@@ -26,6 +26,7 @@ import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.StatusPersonalizad
 import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.ValorCampoHandler;
 import lombok.RequiredArgsConstructor;
 import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.EditalExtraSisuService;
+import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.HistoricoEtapaInscricaoHandler;
 
 @Component
 @RequiredArgsConstructor
@@ -36,6 +37,7 @@ public class Fachada {
     private final EditalInscricaoHandler editalInscricaoHandler;
     private final StatusPersonalizadoHandler statusPersonalizadoHandler;
     private final ValorCampoHandler valorCampoHandler;
+    private final HistoricoEtapaInscricaoHandler editalHistoricoEtapaHandler;
 
     @Autowired
     private EtapaServiceHandler etapaHandler;
@@ -184,6 +186,16 @@ public class Fachada {
 
     public void deletarTipoEdital(Long id) {
         tipoEditalServiceClient.deletar(id);
+    }
+
+    // =================== Histórico etapa inscrição ===================
+
+    public HistoricoEtapaInscricaoResponse buscarHistoricoExterno(Long id) {
+        return editalHistoricoEtapaHandler.buscarPorId(id);
+    }
+
+    public PageResponse<HistoricoEtapaInscricaoResponse> listarHistoricosExternos() {
+        return editalHistoricoEtapaHandler.listar();
     }
 
 }
