@@ -7,11 +7,15 @@ import org.springframework.stereotype.Component;
 import com.querydsl.core.types.Predicate;
 
 import br.edu.ufape.sgu_extra_sisu_service.controller.request.StatusPersonalizadoRequest;
+import br.edu.ufape.sgu_extra_sisu_service.controller.request.ValorCampoRequest;
 import br.edu.ufape.sgu_extra_sisu_service.controller.response.InscricaoResponse;
+import br.edu.ufape.sgu_extra_sisu_service.controller.response.PageResponse;
 import br.edu.ufape.sgu_extra_sisu_service.controller.response.StatusPersonalizadoResponse;
+import br.edu.ufape.sgu_extra_sisu_service.controller.response.ValorCampoResponse;
 import br.edu.ufape.sgu_extra_sisu_service.model.EditalExtraSisu;
 import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.EditalInscricaoHandler;
 import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.StatusPersonalizadoHandler;
+import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.ValorCampoHandler;
 import lombok.RequiredArgsConstructor;
 import br.edu.ufape.sgu_extra_sisu_service.service.interfaces.EditalExtraSisuService;
 
@@ -23,6 +27,7 @@ public class Fachada {
     private final EditalExtraSisuService extraSisuService;
     private final EditalInscricaoHandler editalInscricaoHandler;
     private final StatusPersonalizadoHandler statusPersonalizadoHandler;
+    private final ValorCampoHandler valorCampoHandler;
 
     public EditalExtraSisu salvarEditalExtraSisu(EditalExtraSisu edital) {
         return extraSisuService.salvar(edital);
@@ -83,6 +88,28 @@ public class Fachada {
     
     public StatusPersonalizadoResponse editarStatusPersonalizado(Long id, StatusPersonalizadoRequest request) {
         return statusPersonalizadoHandler.atualizarStatusPersonalizado(id, request);
+    }
+
+    // =================== Valor campo ===================
+
+    public ValorCampoResponse salvarValorCampoExterno(ValorCampoRequest request) {
+        return valorCampoHandler.salvar(request);
+    }
+
+    public ValorCampoResponse editarValorCampoExterno(Long id, ValorCampoRequest request) {
+        return valorCampoHandler.atualizar(id, request);
+    }
+
+    public ValorCampoResponse buscarValorCampoExterno(Long id) {
+        return valorCampoHandler.buscarPorId(id);
+    }
+
+    public PageResponse<ValorCampoResponse> listarValoresCampoExternos() {
+        return valorCampoHandler.listar();
+    }
+
+    public void deletarValorCampoExterno(Long id) {
+        valorCampoHandler.deletar(id);
     }
 
 }
