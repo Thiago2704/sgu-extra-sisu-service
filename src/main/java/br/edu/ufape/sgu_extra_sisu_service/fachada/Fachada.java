@@ -1,10 +1,10 @@
 package br.edu.ufape.sgu_extra_sisu_service.fachada;
 
-import br.edu.ufape.sgu_extra_sisu_service.controller.request.DataEtapaRequest;
-import br.edu.ufape.sgu_extra_sisu_service.controller.request.EtapaRequest;
-import br.edu.ufape.sgu_extra_sisu_service.controller.response.DataEtapaResponse;
-import br.edu.ufape.sgu_extra_sisu_service.controller.response.EtapaResponse;
+import br.edu.ufape.sgu_extra_sisu_service.controller.request.*;
+import br.edu.ufape.sgu_extra_sisu_service.controller.response.*;
 import br.edu.ufape.sgu_extra_sisu_service.editais.DataEtapaServiceClient;
+import br.edu.ufape.sgu_extra_sisu_service.editais.DocumentoServiceClient;
+import br.edu.ufape.sgu_extra_sisu_service.editais.TipoEditalServiceClient;
 import br.edu.ufape.sgu_extra_sisu_service.service.EtapaServiceHandler;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +42,12 @@ public class Fachada {
 
     @Autowired
     private DataEtapaServiceClient dataEtapaServiceClient;
+
+    @Autowired
+    private DocumentoServiceClient documentoServiceClient;
+
+    @Autowired
+    private TipoEditalServiceClient tipoEditalServiceClient;
 
     public EditalExtraSisu salvarEditalExtraSisu(EditalExtraSisu edital) {
         return extraSisuService.salvar(edital);
@@ -95,11 +101,11 @@ public class Fachada {
     public StatusPersonalizadoResponse buscarStatusPersonalizadoPorId(Long id) {
         return statusPersonalizadoHandler.buscarStatusPersonalizadoPorId(id);
     }
-    
+
     public StatusPersonalizadoResponse salvarStatusPersonalizado(StatusPersonalizadoRequest request) {
         return statusPersonalizadoHandler.criarStatusPersonalizado(request);
     }
-    
+
     public StatusPersonalizadoResponse editarStatusPersonalizado(Long id, StatusPersonalizadoRequest request) {
         return statusPersonalizadoHandler.atualizarStatusPersonalizado(id, request);
     }
@@ -143,4 +149,41 @@ public class Fachada {
     public DataEtapaResponse salvarDataEtapa(@Valid DataEtapaRequest request) {
         return dataEtapaServiceClient.salvar(request);
     }
+
+    /* =========================== Documentos =================================*/
+
+    public DocumentoResponse salvarDocumento(@Valid DocumentoRequest request) {
+        return documentoServiceClient.salvar(request);
+    }
+
+    public DocumentoResponse editarDocumento(Long id, DocumentoRequest request) {
+        return documentoServiceClient.editar(id, request);
+    }
+
+    public void deletarDocumento(Long id) {
+         documentoServiceClient.deletar(id);
+    }
+
+    /*============================== TipoEdital ===============================*/
+
+    public TipoEditalResponse salvarTipoEdital(TipoEditalRequest request) {
+        return tipoEditalServiceClient.salvar(request);
+    }
+
+    public TipoEditalResponse buscarTipoEdital(Long id) {
+        return tipoEditalServiceClient.buscar(id);
+    }
+
+    public Page<TipoEditalResponse> listarTiposEditais(Pageable pageable) {
+        return tipoEditalServiceClient.listar(pageable);
+    }
+
+    public TipoEditalResponse editarTipoEdital(Long id, TipoEditalRequest request) {
+        return tipoEditalServiceClient.editar(id, request);
+    }
+
+    public void deletarTipoEdital(Long id) {
+        tipoEditalServiceClient.deletar(id);
+    }
+
 }
